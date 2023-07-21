@@ -1,10 +1,10 @@
-# My personal dotfiles
+# ملفاتي الشخصية لـ "dotfiles"
 
-My personal dotfiles. Also used by nearly all other geeks at [spatie.be](http://spatie.be) and [the amazing Frederick Vanbrabant](https://twitter.com/maybeFrederick/status/912620087538016257).
+ملفاتي الشخصية لـ "dotfiles". يُستخدم أيضًا من قبل معظم المبرمجين الآخرين في [spatie.be](http://spatie.be) و[المذهل Frederick Vanbrabant](https://twitter.com/maybeFrederick/status/912620087538016257).
 
-It contains the installation of some basic tools, some handy aliases and functions. Backups of settings are done via [Mackup](https://github.com/lra/mackup).
+يحتوي على تثبيت بعض الأدوات الأساسية وبعض الاختصارات والوظائف المفيدة. تتم عمل نسخ احتياطية للإعدادات باستخدام [Mackup](https://github.com/lra/mackup).
 
-You can install them by cloning the repository as `.dotfiles` in your home directory and running the bootstrap script.
+يمكنك تثبيتها عن طريق استنساخ المستودع باسم `.dotfiles` في دليل المستخدم الخاص بك وتشغيل سيناريو التشغيل الأولي.
 
 ```
 git clone git@github.com:freekmurze/dotfiles.git .dotfiles
@@ -12,12 +12,12 @@ cd .dotfiles
 ./bootstrap
 ```
 
-The bootstrap script can be run by cd-ing into the `.dotfiles` directory and performing this command:
+يمكن تشغيل سيناريو التشغيل الأولي عن طريق الانتقال إلى دليل `.dotfiles` وتنفيذ هذا الأمر:
 
 ```bash
 ./bootstrap
 ```
 
-Feel free to create an issue on this repo if you have any questions about them.
+لا تتردد في إنشاء مشكلة في هذا المستودع إذا كان لديك أي أسئلة حوله.
 
-![screenshot](https://freekmurze.github.io/dotfiles/screenshot.png)
+![لقطة شاشة](https://freekmurze.github.io/dotfiles/screenshot.png)

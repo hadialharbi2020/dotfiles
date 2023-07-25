@@ -20,4 +20,4 @@ cd .dotfiles
 
 لا تتردد في إنشاء مشكلة في هذا المستودع إذا كان لديك أي أسئلة حوله.
 
-![لقطة شاشة](https://hadialharbi2020.github.io/dotfiles/screenshot.png)
+![لقطة شاشة](https://freekmurze.github.io/dotfiles/screenshot.png)

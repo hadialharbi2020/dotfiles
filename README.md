@@ -7,7 +7,7 @@
 يمكنك تثبيتها عن طريق استنساخ المستودع باسم `.dotfiles` في دليل المستخدم الخاص بك وتشغيل سيناريو التشغيل الأولي.
 
 ```
-git clone git@github.com:freekmurze/dotfiles.git .dotfiles
+git clone git@github.com:hadialharbi2020/dotfiles.git .dotfiles
 cd .dotfiles
 ./bootstrap
 ```
@@ -20,4 +20,4 @@ cd .dotfiles
 
 لا تتردد في إنشاء مشكلة في هذا المستودع إذا كان لديك أي أسئلة حوله.
 
-![لقطة شاشة](https://freekmurze.github.io/dotfiles/screenshot.png)
+![لقطة شاشة](https://hadialharbi2020.github.io/dotfiles/screenshot.png)

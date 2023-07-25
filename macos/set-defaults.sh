@@ -1,79 +1,79 @@
 #!/usr/bin/env bash
 echo 'start osx/set-defaults.sh'
 
-# Ask for the administrator password upfront
+# اطلب كلمة مرور المسؤول مُسبقًا
 sudo -v
 
-# Keep-alive: update existing `sudo` time stamp until `.osx` has finished
+# استمرارية: تحديث الطابع الزمني الحالي لـ 'sudo' حتى انتهاء `.osx`
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 ###############################################################################
-# General UI/UX                                                               #
+# واجهة المستخدم العامة                                                      #
 ###############################################################################
 
-# Disable the sound effects on boot
+# تعطيل آثار الصوت عند بدء التشغيل
 sudo nvram SystemAudioVolume=" "
 
-# Menu bar: disable transparency
+# شريط القائمة: تعطيل الشفافية
 #defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 
-# Set sidebar icon size to medium
+# تعيين حجم أيقونات الشريط الجانبي إلى متوسط
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
 
-# Increase window resize speed for Cocoa applications
+# زيادة سرعة تغيير حجم النافذة للتطبيقات الكوكوا
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
-# Expand save panel by default
+# توسيع لوحة الحفظ افتراضيًا
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 
-# Expand print panel by default
+# توسيع لوحة الطباعة افتراضيًا
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
-# Save to disk (not to iCloud) by default
+# حفظ على القرص (وليس في iCloud) افتراضيًا
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
-# Automatically quit printer app once the print jobs complete
+# إنهاء تلقائي لتطبيق الطابعة بمجرد الانتهاء من الطباعة
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
-# Disable the “Are you sure you want to open this application?” dialog
+# تعطيل مربع حوار "هل أنت متأكد من أنك تريد فتح هذا التطبيق؟"
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
-# Disable Resume system-wide
+# تعطيل استئناف النظام على مستوى النظام بأكمله
 defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 
-# Disable automatic termination of inactive apps
+# تعطيل إنهاء تلقائي للتطبيقات الغير نشطة
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
-# Disable the crash reporter
+# تعطيل مرسل التقارير عن الأعطال
 #defaults write com.apple.CrashReporter DialogType -string "none"
 
-# Reveal IP address, hostname, OS version, etc. when clicking the clock
-# in the login window
+# إظهار عناوين IP واسم الجهاز ونسخة نظام التشغيل عند النقر على الساعة
+# في نافذة تسجيل الدخول
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
-# Disable smart quotes as they’re annoying when typing code
+# تعطيل اقتباس العبارات الذكي لأنها مزعجة أثناء كتابة الشيفرة
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 
-# Disable smart dashes as they’re annoying when typing code
+# تعطيل الشرطات الذكية لأنها مزعجة أثناء كتابة الشيفرة
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
 ###############################################################################
-# SSD-specific tweaks                                                         #
+# تعديلات محددة لأجهزة التخزين بالحالة الصلبة                                  #
 ###############################################################################
 
-# Disable hibernation (speeds up entering sleep mode)
+# تعطيل السبات (يسرّع دخول وضع السكون)
 sudo pmset -a hibernatemode 0
 
-# Disable the sudden motion sensor as it’s not useful for SSDs
+# تعطيل مستشعر الحركة المفاجئة لأنه غير مفيد لأقراص الحالة الصلبة
 sudo pmset -a sms 0
 
 ###############################################################################
-# Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
+# لوحة اللمس والفأرة ولوحة المفاتيح وملحقات بلوتوث والإدخال                     #
 ###############################################################################
 
-# Increase sound quality for Bluetooth headphones/headsets
+# زيادة جودة الصوت لسماعات/سماعات البلوتوث
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Max (editable)" 80
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" 80
 defaults write com.apple.BluetoothAudioAgent "Apple Initial Bitpool (editable)" 80
@@ -82,194 +82,193 @@ defaults write com.apple.BluetoothAudioAgent "Negotiated Bitpool" 80
 defaults write com.apple.BluetoothAudioAgent "Negotiated Bitpool Max" 80
 defaults write com.apple.BluetoothAudioAgent "Negotiated Bitpool Min" 80
 
-# Enable full keyboard access for all controls
-# (e.g. enable Tab in modal dialogs)
+# تمكين الوصول الكامل لواجهة المستخدم لجميع العناصر التحكم
+# (على سبيل المثال، تمكين مفتاح Tab في الحوارات المنبثقة)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
-# Set language and text formats
-# Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
-# `Inches`, `en_GB` with `en_US`, and `true` with `false`.
+# تعيين اللغة وتنسيقات النص
+# ملاحظة: إذا كنت في الولايات المتحدة، استبدل "EUR" بـ "USD"، و "Centimeters" بـ "Inches"، "en_GB" بـ "en_US" و "true" بـ "false".
 defaults write NSGlobalDomain AppleLanguages -array "en"
 defaults write NSGlobalDomain AppleLocale -string "en_GB@currency=EUR"
 defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
 defaults write NSGlobalDomain AppleMetricUnits -bool true
 
-# Set the timezone; see `systemsetup -listtimezones` for other values
+# تعيين المنطقة الزمنية؛ انظر "systemsetup -listtimezones" لقائمة قيم أخرى
 systemsetup -settimezone "Europe/Brussels" > /dev/null
 
-# Disable auto-correct
+# تعطيل التصحيح التلقائي
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
-# Stop iTunes from responding to the keyboard media keys
+# توقف iTunes عن الاستجابة لمفاتيح الوسائط في لوحة المفاتيح
 #launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
 
 ###############################################################################
-# Screen                                                                      #
+# الشاشة                                                                     #
 ###############################################################################
 
-# Require password immediately after sleep or screen saver begins
+# طلب كلمة مرور فوريا بعد الدخول في وضع السكون أو الشاشة العاكسة
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 ###############################################################################
-# Finder                                                                      #
+# الباحث                                                                     #
 ###############################################################################
 
-# Set Desktop as the default location for new Finder windows
-# For other paths, use `PfLo` and `file:///full/path/here/`
+# تعيين سطح المكتب كمكان افتراضي لنوافذ الباحث الجديدة
+# بالنسبة لمسارات أخرى، استخدم `PfLo` و `file:///full/path/here/`
 defaults write com.apple.finder NewWindowTarget -string "PfDe"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
 
-# Show icons for hard drives, servers, and removable media on the desktop
+# عرض الأيقونات لأقراص الصلب والخوادم والوسائط القابلة للإزالة على سطح المكتب
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
-# Finder: show all filename extensions
+# الباحث: عرض جميع ملحقات اسم الملف
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
-# Finder: allow text selection in Quick Look
+# الباحث: السماح باختيار النص في النظرة السريعة
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
-# Display full POSIX path as Finder window title
+# عرض المسار الكامل للملف في عنوان نافذة الباحث
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
-# When performing a search, search the current folder by default
+# عند القيام بعملية بحث، ابحث في المجلد الحالي بشكل افتراضي
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
-# Disable the warning when changing a file extension
+# تعطيل التحذير عند تغيير امتداد الملف
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
-# Avoid creating .DS_Store files on network volumes
+# تجنب إنشاء ملفات .DS_Store على وحدات الشبكة
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-# Disable disk image verification
+# تعطيل التحقق من صحة الصورة القرص
 defaults write com.apple.frameworks.diskimages skip-verify -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
 
-# Use list view in all Finder windows by default
-# Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
+# استخدم عرض القائمة في جميع نوافذ الباحث افتراضيًا
+# رموز ذات أربعة أحرف لطرق العرض الأخرى: `icnv`، `clmv`، `Flwv`
 defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
-# Disable the warning before emptying the Trash
+# تعطيل التحذير قبل تفريغ سلة المهملات
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
-# Show the ~/Library folder
+# عرض مجلد ~/Library
 chflags nohidden ~/Library
 
-# Show the ~/Users folder
+# عرض مجلد ~/Users
 chflags nohidden /Users
 
-# Expand the following File Info panes:
-# “General”, “Open with”, and “Sharing & Permissions”
+# توسيع لوحة معلومات الملفات التالية:
+# "General"، "Open with"، و "Sharing & Permissions"
 defaults write com.apple.finder FXInfoPanesExpanded -dict \
 	General -bool true \
 	OpenWith -bool true \
 	Privileges -bool true
 
 ###############################################################################
-# Screenshots                                                                 #
+# لقطات الشاشة                                                              #
 ###############################################################################
 
-# Set default screenshot location
+# تعيين مكان لقطة الشاشة الافتراضي
 #defaults write com.apple.screencapture "location" -string "~/Documents/Screenshots"
 
-# Exclude date and time in screenshot filenames
+# استبعاد التاريخ والوقت من أسماء ملفات لقطات الشاشة
 defaults write com.apple.screencapture "include-date" -bool false
 
-# Change the default screenshot file name
+# تغيير اسم ملف لقطة الشاشة الافتراضي
 defaults write com.apple.screencapture "name" -string "screenshot"
 
 ###############################################################################
-# Dock, Dashboard, and hot corners                                            #
+# قفصة المهام والواجهة الجانبية وزوايا الساخنة                                #
 ###############################################################################
 
-# Prevent applications from bouncing in Dock
+# منع تمايز التطبيقات في القفصة
 defaults write com.apple.dock no-bouncing -bool true
 
-# Set the icon size of Dock items to 72 pixels
+# تعيين حجم أيقونات القفصة إلى 72 بكسل
 defaults write com.apple.dock tilesize -int 72
 
-# Hide indicator lights for open applications in the Dock
+# إخفاء أضواء المؤشر للتطبيقات المفتوحة في القفصة
 defaults write com.apple.dock show-process-indicators -bool false
 
-# Wipe all (default) app icons from the Dock
-# This is only really useful when setting up a new Mac, or if you don’t use
-# the Dock to launch apps.
+# مسح كل الأيقونات (الافتراضي) للتطبيقات من القفصة
+# هذا يكون مفيدًا فقط عند إعداد جهاز Mac جديد، أو إذا لم تستخدم
+# القفصة لتشغيل التطبيقات.
 defaults write com.apple.dock persistent-apps -array ""
 
-# Disable Dashboard
+# تعطيل الواجهة الجانبية
 defaults write com.apple.dashboard mcx-disabled -bool true
 
-# Don’t show Dashboard as a Space
+# عدم عرض الواجهة الجانبية كمساحة
 defaults write com.apple.dock dashboard-in-overlay -bool true
 
-# Don’t automatically rearrange Spaces based on most recent use
+# عدم إعادة ترتيب مساحات العمل تلقائيًا استنادًا إلى الاستخدام الأكثر حداثة
 defaults write com.apple.dock mru-spaces -bool false
 
-# Make Dock icons of hidden applications translucent
+# جعل أيقونات القفصة للتطبيقات المخفية شفافة
 defaults write com.apple.dock showhidden -bool true
 
 ###############################################################################
-# Safari & WebKit                                                             #
+# Safari وWebKit                                                             #
 ###############################################################################
 
-# Enable Safari’s debug menu
+# تمكين قائمة تصحيح أخطاء Safari
 defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
-# Enable the Develop menu and the Web Inspector in Safari
+# تمكين قائمة Develop ومفتش الويب في Safari
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
 
-# Don’t display the annoying prompt when quitting iTerm
+# عدم عرض الإشعار المزعج عند إنهاء iTerm
 #defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
-# Prevent Time Machine from prompting to use new hard drives as backup volume
+# منع Time Machine من طلب استخدام وحدات الأقراص الصلبة الجديدة كحجم نسخ احتياطي
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 ###############################################################################
-# Activity Monitor                                                            #
+# مراقب النشاط                                                              #
 ###############################################################################
 
-# Show the main window when launching Activity Monitor
+# عرض النافذة الرئيسية عند بدء تشغيل مراقب النشاط
 defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
 
-# Visualize CPU usage in the Activity Monitor Dock icon
+# تجسيد استخدام وحدة المعالجة المركزية في رمز مراقب النشاط في القفصة
 defaults write com.apple.ActivityMonitor IconType -int 5
 
-# Show all processes in Activity Monitor
+# عرض جميع العمليات في مراقب النشاط
 defaults write com.apple.ActivityMonitor ShowCategory -int 0
 
-# Sort Activity Monitor results by CPU usage
+# فرز نتائج مراقب النشاط حسب استخدام وحدة المعالجة المركزية
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
 ###############################################################################
-# Address Book, Dashboard, iCal, TextEdit, and Disk Utility                   #
+# دفتر العناوين والواجهة الجانبية وأداة iCal وTextEdit وDisk Utility                #
 ###############################################################################
 
-# Use plain text mode for new TextEdit documents
+# استخدام وضع النص العادي لمستندات TextEdit الجديدة
 defaults write com.apple.TextEdit RichText -int 0
 
-# Open and save files as UTF-8 in TextEdit
+# فتح وحفظ الملفات بتنسيق UTF-8 في TextEdit
 defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 
 ###############################################################################
-# Messages                                                                    #
+# الرسائل                                                                    #
 ###############################################################################
 
-# Disable smart quotes as it’s annoying for messages that contain code
+# تعطيل اقتباس العبارات الذكي لأنها مزعجة عند الرسائل التي تحتوي على كود
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false
 
-# Disable continuous spell checking
+# تعطيل التحقق المستمر للتهجئة
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
 
 ###############################################################################
-# Kill affected applications                                                  #
+# قتل التطبيقات المتأثرة                                                     #
 ###############################################################################
 
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
@@ -277,4 +276,4 @@ for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 	"Terminal" "Transmission" "Twitter" "iCal"; do
 	killall "${app}" > /dev/null 2>&1
 done
-echo "Done. Note that some of these changes require a logout/restart to take effect."
+echo "تم. يُرجى ملاحظة أن بعض هذه التغييرات تتطلب تسجيل الخروج/إعادة التشغيل للتأثير."
